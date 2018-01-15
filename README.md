@@ -1,2 +1,13 @@
-# migrate-m1tom2-analyser
+# Magefan Analyser: Migrate Magento 1 to Magento 2
 Analyze Magento 2 server requirements and show Magento 1 system information
+
+## Installation
+  * Download [ZIP Archive](https://github.com/magefan/migrate-m1tom2-analyser/archive/master.zip)
+  * Extract files
+  * Copy files and folders from archive to to your Magento root folder
+  * Flush Magento Cache
+  
+## How To Use
+  * Navigate to Magento Admin Panel > System > Magefan Analyser: Migrate Magento 1 to Magento 2
+  * Check and prit store information
+  * Contanct Magefan
