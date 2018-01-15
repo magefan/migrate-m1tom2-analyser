@@ -1,0 +1,190 @@
+<div class="content-header">
+    <table cellspacing="0">
+        <tbody><tr>
+            <td style="width:50%;">
+                <h3 class="icon-head"><?php echo $this->__("Magefan Analyser: Migrate Magento 1 to Magento 2") ?></h3>
+                <p class="form-buttons">
+                    <button  type="button" class="scalable" onclick="window.print();" style=""><span><span><span><?php echo $this->__('Print Report') ?></span></span></span></button>
+                    <button  type="button" class="scalable" onclick="window.open('https://magefan.com/contact?from=analizer')" style=""><span><span><span><?php echo $this->__('Contact Magefan') ?></span></span></span></button>
+                </p>
+            </td>
+        </tr>
+    </tbody></table>
+</div>
+
+
+<div class="entry-edit">
+   <div class="entry-edit-head">
+      <h4 class="icon-head head-account"><?php echo $this->__('System Information') ?> </h4>
+   </div>
+   <div class="fieldset">
+      <table cellspacing="0" class="form-list">
+         <tbody>
+            <tr>
+               <td>
+                    <strong>Magento Version: <?php echo $this->getMagentoVersion() ?></strong>
+               </td>
+            </tr>
+            <tr>
+               <td>
+                    <?php
+                        $checkResult = $this->checkPhpVersion();
+                        if ($checkResult['responseType'] === Magefan_M1ToM2_Block_Adminhtml_Index::RESPONSE_TYPE_ERROR) {
+                            echo '<strong style="color:red">';
+                            echo  $checkResult['data']['message'];
+                            echo '</strong>';
+                        } else {
+                            echo '<span style="color:green">';
+                            echo  $checkResult['data']['message'];
+                            echo '</span>';
+                        }
+                    ?>
+               </td>
+            </tr>
+            <tr>
+               <td>
+                    <?php
+                        $checkResult = $this->checkPhpExtensions();
+                        if ($checkResult['responseType'] === Magefan_M1ToM2_Block_Adminhtml_Index::RESPONSE_TYPE_ERROR) {
+                            if (isset($checkResult['data']['missing'])) {
+                                echo '<strong style="color:red">';
+                                echo  "Missing following PHP extensions: '"
+                                    . implode("' '", $checkResult['data']['missing']) . "'";
+                                echo '</strong>';
+                            } 
+
+                            if (isset($checkResult['data']['message'])) {
+                                echo '<strong style="color:red">';
+                                echo  $checkResult['data']['message'];
+                                echo '</strong>';
+                            }
+                            
+                        } else {
+                            echo '<span style="color:green">';
+                            echo 'All required for Magento 2 PHP extensions are installed.';
+                            echo '</span>';
+                        }
+                    ?>
+               </td>
+            </tr>
+            <tr>
+               <td>
+                    <?php
+                        $checkResult = $this->checkMysqlVersion();
+                        if ($checkResult['responseType'] === Magefan_M1ToM2_Block_Adminhtml_Index::RESPONSE_TYPE_ERROR) {
+                            echo '<strong style="color:red">';
+                            echo  $checkResult['data']['message'];
+                            echo '</strong>';
+                        } else {
+                            echo '<span style="color:green">';
+                            echo  $checkResult['data']['message'];
+                            echo '</span>';
+                        }
+                    ?>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+</div>
+
+<div class="entry-edit">
+   <div class="entry-edit-head">
+      <h4 class="icon-head head-account"><?php echo $this->__('Model Sizes') ?> </h4>
+   </div>
+   <div class="fieldset">
+      <table cellspacing="0" class="form-list">
+         <tbody>
+            <?php foreach ($this->getModelSizes() as $model => $size) { ?>
+            <tr>
+                <td class="label"><label><?php echo $model ?></label></td>
+                <td class="value"><strong><?php echo $size ?></strong></td>
+            </tr>
+            <?php } ?>
+         </tbody>
+      </table>
+   </div>
+</div>
+
+<div class="entry-edit">
+   <div class="entry-edit-head">
+      <h4 class="icon-head head-account"><?php echo $this->__('Extensions') ?> </h4>
+   </div>
+   <div class="fieldset">
+      <table cellspacing="0" class="form-list">
+         <tbody>
+            <?php foreach ($this->getAllExtensions() as $name => $info) { ?>
+            <tr>
+                <td class="label"><label><?php echo $name ?></label></td>
+                <td class="value">
+                    <?php if ($info->is('active')) { ?>
+                        <strong>Active</strong>
+                    <?php } else { ?>
+                        Not Active
+                    <?php } ?>
+                </td>
+            </tr>
+            <?php } ?>
+         </tbody>
+      </table>
+   </div>
+</div>
+
+<div class="entry-edit">
+   <div class="entry-edit-head">
+      <h4 class="icon-head head-account"><?php echo $this->__('Themes') ?> </h4>
+   </div>
+   <div class="fieldset">
+      <table cellspacing="0" class="form-list">
+         <tbody>
+            <?php foreach ($this->getThemes() as $theme) { ?>
+            <tr>
+                <td class="label"><label><?php echo $theme ?></label></td>
+                <td class="value">
+                </td>
+            </tr>
+            <?php } ?>
+         </tbody>
+      </table>
+   </div>
+</div>
+
+<div class="entry-edit">
+   <div class="entry-edit-head">
+      <h4 class="icon-head head-account"><?php echo $this->__('Overriden files in Local Codepool') ?> </h4>
+   </div>
+   <div class="fieldset">
+      <table cellspacing="0" class="form-list">
+         <tbody>
+            <?php foreach ($this->getOverridenFilesInLocal() as $from => $to) { ?>
+            <tr>
+                <td ><label><?php echo $from ?></label></td>
+                <td> &nbsp; </td>
+                <td><?php echo $to ?></td>
+            </tr>
+            <?php } ?>
+         </tbody>
+      </table>
+   </div>
+</div>
+
+<?php /*
+<div class="entry-edit">
+   <div class="entry-edit-head">
+      <h4 class="icon-head head-account"><?php echo $this->__('Overriden files via XML') ?> </h4>
+   </div>
+   <div class="fieldset">
+      <table cellspacing="0" class="form-list">
+         <tbody>
+            <?php foreach ($this->getOverridenFilesViaXML() as $from => $to) { ?>
+            <tr>
+                <td ><label><?php echo $from ?></label></td>
+                <td> &nbsp; </td>
+                <td><?php echo $to ?></td>
+            </tr>
+            <?php } ?>
+         </tbody>
+      </table>
+   </div>
+</div>
+*/ ?>

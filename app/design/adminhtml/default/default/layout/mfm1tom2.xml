@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <adminhtml_mfm1tom2_index_index>
+	<reference name="content">
+	  <block type="mfm1tom2/adminhtml_index" name="m1tom2" template="mfm1tom2/index.phtml"/>
+	</reference>
+  </adminhtml_mfm1tom2_index_index>
+</layout>

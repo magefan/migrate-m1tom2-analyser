@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Magefan_M1ToM2>
+      <active>true</active>
+      <codePool>community</codePool>
+      <version>1.0.0</version>
+    </Magefan_M1ToM2>
+  </modules>
+</config>

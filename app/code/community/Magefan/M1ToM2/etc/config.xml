@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Magefan_M1ToM2>
+      <version>1.0.0</version>
+    </Magefan_M1ToM2>
+  </modules>
+  <global>
+    <helpers>
+      <mfm1tom2>
+        <class>Magefan_M1ToM2_Helper</class>
+      </mfm1tom2>
+    </helpers>
+	<blocks>
+	  <mfm1tom2>
+		<class>Magefan_M1ToM2_Block</class>
+	  </mfm1tom2>
+	</blocks>
+  </global>
+  <admin>
+    <routers>
+        <adminhtml>
+            <args>
+                <modules>
+                    <mfm1tom2 before="Mage_Adminhtml">Magefan_M1ToM2_Adminhtml</mfm1tom2>
+                </modules>
+            </args>
+        </adminhtml>
+    </routers>
+  </admin>
+  <adminhtml>
+	<menu>
+	  <system>
+		<children>
+		  <mfm1tom2 module="mfm1tom2">
+			<title>Magefan Analyser: Migrate Magento 1 to Magento 2</title>
+			<sort_order>0</sort_order>
+			<action>adminhtml/mfm1tom2_index/index</action>
+		  </mfm1tom2>
+		</children>
+	  </system>
+	</menu>
+	<acl>
+	  <resources>
+		<admin>
+		  <children>
+			<system>
+			  <children>
+				  <mfm1tom2 translate="title">
+					<title>Magefan Analyser: Migrate Magento 1 to Magento 2</title>
+				  </mfm1tom2>
+			  </children>
+			</system>
+		  </children>
+		</admin>
+	  </resources>
+	</acl>
+	<layout>
+	  <updates>
+		<mfm1tom2>
+		  <file>mfm1tom2.xml</file>
+		</mfm1tom2>
+	  </updates>
+	</layout>
+  </adminhtml>
+</config> 
