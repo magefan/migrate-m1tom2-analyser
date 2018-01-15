@@ -12,5 +12,5 @@ Magento Enterprise and Community Editions 1.5.x-1.9.x
   
 ## How To Use
   * Navigate to Magento Admin Panel > System > Magefan Analyser: Migrate Magento 1 to Magento 2
-  * Check and prit store information
-  * Contanct Magefan
+  * Check and print store information
+  * Contact Magefan
